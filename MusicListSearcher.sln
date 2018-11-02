@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicListSearcher", "WindowsFormsApp1\MusicListSearcher.csproj", "{7B55E082-ADC9-45BA-B459-94761CF71098}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B55E082-ADC9-45BA-B459-94761CF71098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B55E082-ADC9-45BA-B459-94761CF71098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B55E082-ADC9-45BA-B459-94761CF71098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B55E082-ADC9-45BA-B459-94761CF71098}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A764B7FF-D473-4D26-A221-B0991110C892}
+	EndGlobalSection
+EndGlobal
