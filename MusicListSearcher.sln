@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicListSearcher", "WindowsFormsApp1\MusicListSearcher.csproj", "{7B55E082-ADC9-45BA-B459-94761CF71098}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicListSearcher", "MusicListSearcher\MusicListSearcher.csproj", "{7B55E082-ADC9-45BA-B459-94761CF71098}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

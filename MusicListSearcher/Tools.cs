@@ -8,7 +8,7 @@ using System.Windows.Forms.VisualStyles;
 using MusicListSearcher;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace WindowsFormsApp1
+namespace MusicListSearcher
 {
     class Tools
     {
