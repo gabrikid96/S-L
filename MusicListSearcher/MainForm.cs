@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Text;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
-using WindowsFormsApp1;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace MusicListSearcher

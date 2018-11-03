@@ -43,6 +43,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Costura.dll" size="4096">
+      <assemblyIdentity name="Costura" version="3.1.6.0" publicKeyToken="9919EF960D84173D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>sYT9ej4+kYFV7wTX4ERMnkCaqUiHwOkHkjUJk6oIX+Q=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.WindowsAPICodePack.dll" size="104960">
       <assemblyIdentity name="Microsoft.WindowsAPICodePack" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -67,17 +79,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MusicListSearcher.exe" size="764896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MusicListSearcher.exe" size="989664">
       <assemblyIdentity name="MusicListSearcher" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>sQ0dcvRAAeDPXPyV/f48h3AhTAgx8G6lgFzRN9FZT3Q=</dsig:DigestValue>
+        <dsig:DigestValue>k/IolqemrscwaFkpbf24ghJlGfDfUVLzPmjWNxabL8s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="FodyWeavers.xml" size="79" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>1YHAw8HAn8dI4yeEFTc4nbx40qMGhhV6pCLteTS3HRg=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="icon.ico" size="370070">
     <hash>
       <dsig:Transforms>
