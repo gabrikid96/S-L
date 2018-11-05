@@ -39,17 +39,14 @@
             this.outputFolderInput = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.excelFileInput = new System.Windows.Forms.TextBox();
-            this.numBailes = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.resultsLabel = new System.Windows.Forms.Label();
             this.resultBox = new System.Windows.Forms.RichTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numBailes)).BeginInit();
             this.SuspendLayout();
             // 
             // excelFileButton
             // 
-            this.excelFileButton.Location = new System.Drawing.Point(571, 66);
+            this.excelFileButton.Location = new System.Drawing.Point(654, 66);
             this.excelFileButton.Name = "excelFileButton";
             this.excelFileButton.Size = new System.Drawing.Size(29, 20);
             this.excelFileButton.TabIndex = 0;
@@ -137,25 +134,8 @@
             // 
             this.excelFileInput.Location = new System.Drawing.Point(68, 66);
             this.excelFileInput.Name = "excelFileInput";
-            this.excelFileInput.Size = new System.Drawing.Size(497, 20);
+            this.excelFileInput.Size = new System.Drawing.Size(580, 20);
             this.excelFileInput.TabIndex = 2;
-            // 
-            // numBailes
-            // 
-            this.numBailes.Location = new System.Drawing.Point(616, 66);
-            this.numBailes.Name = "numBailes";
-            this.numBailes.Size = new System.Drawing.Size(67, 20);
-            this.numBailes.TabIndex = 12;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(612, 38);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 22);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "# bailes";
             // 
             // progressBar1
             // 
@@ -192,8 +172,6 @@
             this.Controls.Add(this.resultBox);
             this.Controls.Add(this.resultsLabel);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.numBailes);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.folderOutputButton);
@@ -208,7 +186,6 @@
             this.Name = "MainForm";
             this.Text = "SWEET";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numBailes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,8 +203,6 @@
         private System.Windows.Forms.TextBox outputFolderInput;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox excelFileInput;
-        private System.Windows.Forms.NumericUpDown numBailes;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label resultsLabel;
         private System.Windows.Forms.RichTextBox resultBox;

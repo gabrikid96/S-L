@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using Microsoft.Office.Core;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace MusicListSearcher
@@ -63,16 +64,22 @@ namespace MusicListSearcher
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            if (ValidateForm()) return;
             try
             {
                 progressBar1.Value = 0;
                 Log("Leyendo Excel...");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                
+                //List<string> names = Tools.GetMusicNames(excelFileInput.Text, (int) this.numBailes.Value);
+                List<string> names = Tools.GetMusicNames(excelFileInput.Text);
 
-                List<string> names = Tools.GetMusicNames(excelFileInput.Text, (int) this.numBailes.Value);
                 Log($"Se han detectado {names.Count} bailes");
 
                 Tools.CopyMusic(names, this.musicFolderInput.Text, this.outputFolderInput.Text, this);
-                Log("Completado");
+                watch.Stop();
+                Log($"Completado en: {watch.ElapsedMilliseconds} ms");
+
             }
             catch (Exception ex)
             {
@@ -83,7 +90,6 @@ namespace MusicListSearcher
                 Log("\n", LogOptions.NewLine);
                 SavePaths();
             }
-
         }
 
         #region PathsOptions
@@ -122,6 +128,17 @@ namespace MusicListSearcher
 
         #endregion
 
+        public bool ValidateForm()
+        {
+            if (string.IsNullOrEmpty(excelFileInput.Text)) Log("Falta introducir fichero Excel.", LogOptions.Error);
+            if (string.IsNullOrEmpty(musicFolderInput.Text)) Log("Falta introducir la carpeta contenedora de la música.", LogOptions.Error);
+            if (string.IsNullOrEmpty(outputFolderInput.Text)) Log("Falta introducir la carpeta de destino.", LogOptions.Error);
+
+            return string.IsNullOrEmpty(excelFileInput.Text) ||
+                   string.IsNullOrEmpty(musicFolderInput.Text) ||
+                   string.IsNullOrEmpty(outputFolderInput.Text);
+        }
+
         public void Log(string str, LogOptions option = LogOptions.Verbose)
         {
             if (option == LogOptions.NewLine)
@@ -130,7 +147,20 @@ namespace MusicListSearcher
                 return;
             }
 
-            resultBox.SelectionColor = option == LogOptions.Error ? Color.Red : Color.Black;
+            switch (option)
+            {
+                case LogOptions.Error:
+                    resultBox.SelectionColor = Color.Red;
+                    break;
+                case LogOptions.Warning:
+                    resultBox.SelectionColor = Color.DarkOrange;
+                    break;
+                case LogOptions.Verbose:
+                    resultBox.SelectionColor = Color.Black;
+                    break;
+                default:
+                    break;
+            }
 
             this.resultBox.AppendText("[" +
                                       DateTime.Now.ToString("dd/MM - HH:mm:ss") +
@@ -149,8 +179,10 @@ namespace MusicListSearcher
         {
             Verbose,
             Error,
+            Warning,
             NewLine
         }
+
     }
 
 }

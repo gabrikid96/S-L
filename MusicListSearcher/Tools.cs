@@ -55,7 +55,15 @@ namespace MusicListSearcher
             return names;
 
         }
-
+        public static List<string> GetMusicNames(string excelPath)
+        {
+            List<string> names = new List<string>();
+            SlExcelReader slExcel = new SlExcelReader();
+            SlExcelData slExcelData = slExcel.ReadExcel(excelPath);
+            names = slExcelData.DataRows.SelectMany(l => l).Distinct().ToList();
+            names.AddRange(slExcelData.Headers);
+            return names;
+        }
         public static void CopyMusic(List<string> dances, string inputFolder, string outputFolder, MainForm form)
         {
             string[] files = Directory.GetFiles(inputFolder);
@@ -63,14 +71,14 @@ namespace MusicListSearcher
 
             foreach (string dance in dances)
             {
-                List<string> matches = files.Where(f => RenameDance(Path.GetFileName(f).Split('-')[0]).Equals(dance)).ToList();
+                List<string> matches = files.Where(f => RenameDance(Path.GetFileName(f).Split('-')[0]).Equals(RenameDance(dance))).ToList();
 
                 if (matches.Count > 1)
                     form.Log($"{dance.ToUpper()} -> {matches.Count} canciones");
                 else if (matches.Count == 1)
                     form.Log($"{dance.ToUpper()} -> {matches.Count} canción");
                 else
-                    form.Log($"{dance.ToUpper()} -> No se han encontrado canciones", MainForm.LogOptions.Error);
+                    form.Log($"{dance.ToUpper()} -> No se han encontrado canciones", MainForm.LogOptions.Warning);
 
                 foreach (string matchPath in matches)
                 {
