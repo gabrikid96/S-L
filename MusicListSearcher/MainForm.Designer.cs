@@ -159,7 +159,7 @@
             this.resultBox.Location = new System.Drawing.Point(68, 354);
             this.resultBox.Name = "resultBox";
             this.resultBox.ReadOnly = true;
-            this.resultBox.Size = new System.Drawing.Size(616, 107);
+            this.resultBox.Size = new System.Drawing.Size(615, 241);
             this.resultBox.TabIndex = 18;
             this.resultBox.Text = "";
             // 
@@ -168,7 +168,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(795, 534);
+            this.ClientSize = new System.Drawing.Size(782, 607);
             this.Controls.Add(this.resultBox);
             this.Controls.Add(this.resultsLabel);
             this.Controls.Add(this.progressBar1);

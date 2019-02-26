@@ -13,48 +13,8 @@ namespace MusicListSearcher
     class Tools
     {
 
-        public static List<string> GetMusicNames(string excelPath, int num)
-        {
-            //Create COM Objects. Create a COM object for everything that is referenced
-            Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(excelPath);
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-            Excel.Range xlRange = xlWorksheet.UsedRange;
-            List<string> names = new List<string>(num);
-            for (int i = 1; i <= num+1; i++)
-            {
-                for (int j = 1; j <= 1; j++)
-                {
-                    //new line
-                    if (j == 1)
-                        Console.Write("\r\n");
+        public const int ThresholdDistance = 2;
 
-                    //write the value to the console
-                    if (xlRange.Cells[i, j] != null && xlRange.Cells[i, j].Value2 != null)
-                    {
-                        Console.Write(xlRange.Cells[i, j].Value2.ToString() + "\t");
-                        string dance = xlRange.Cells[i, j].Value2.ToString();
-
-                        names.Add(RenameDance(dance));
-                    }
-
-                    //add useful things here!   
-                }
-            }
-            //cleanup
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            Marshal.ReleaseComObject(xlRange);
-            Marshal.ReleaseComObject(xlWorksheet);
-            //close and release
-            xlWorkbook.Close();
-            Marshal.ReleaseComObject(xlWorkbook);
-            //quit and release
-            xlApp.Quit();
-            Marshal.ReleaseComObject(xlApp);
-            return names;
-
-        }
         public static List<string> GetMusicNames(string excelPath)
         {
             List<string> names = new List<string>();
@@ -66,29 +26,37 @@ namespace MusicListSearcher
         }
         public static void CopyMusic(List<string> dances, string inputFolder, string outputFolder, MainForm form)
         {
-            string[] files = Directory.GetFiles(inputFolder);
-            int procesados = 0;
+            var files = Directory.GetFiles(inputFolder, "*.*", SearchOption.AllDirectories).
+                Select(f => new { path = f, filename = RenameDance(Path.GetFileName(f).Split('-')[0])}).ToList();
+            var processed = 0;
 
             foreach (string dance in dances)
             {
-                List<string> matches = files.Where(f => RenameDance(Path.GetFileName(f).Split('-')[0]).Equals(RenameDance(dance))).ToList();
+                var matches = files.Where(f => f.filename.Equals(RenameDance(dance))).ToList();
 
                 if (matches.Count > 1)
                     form.Log($"{dance.ToUpper()} -> {matches.Count} canciones");
                 else if (matches.Count == 1)
                     form.Log($"{dance.ToUpper()} -> {matches.Count} canción");
                 else
-                    form.Log($"{dance.ToUpper()} -> No se han encontrado canciones", MainForm.LogOptions.Warning);
+                {
+                    var bestMatch = BestCoincidence(dance, files.Select(f => f.filename).ToList());
+                    form.Log(dance.ToUpper() +
+                        (!string.IsNullOrEmpty(bestMatch)
+                                 ? $" -> Quisiste decir: {bestMatch.ToUpper()}"
+                                 : " -> No se han encontrado canciones"), 
+                        MainForm.LogOptions.Warning);
+                }
 
-                foreach (string matchPath in matches)
+                foreach (string matchPath in matches.Select(f => f.path))
                 {
                     string originalPath = matchPath;
                     string match = Path.GetFileName(matchPath);
-                    match = string.Format("{0:00}", procesados + 1) + " - " + match;
+                    match = $"{processed + 1:00}" + " - " + match;
                     File.Copy(originalPath, Path.Combine(outputFolder, match), true);
                 }                
-                procesados++;
-                form.UpdateProgressBar(procesados * 100 / dances.Count);
+                processed++;
+                form.UpdateProgressBar(processed * 100 / dances.Count);
             }
         }
 
@@ -97,5 +65,17 @@ namespace MusicListSearcher
             string renamed = dance.ToLower();
             return renamed.Trim();
         }
+
+        public static string BestCoincidence(string input, List<string> possibleCoincidences)
+        {
+            foreach (var possibleCoincidence in possibleCoincidences)
+            {
+                if (Algorithms.LevenshteinDistance(RenameDance(input), possibleCoincidence) <= ThresholdDistance)
+                    return possibleCoincidence;
+            }
+            return null;
+        }
+
+
     }
 }

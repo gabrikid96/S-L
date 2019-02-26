@@ -37,3 +37,4 @@ C:\Users\Gabri\Documents\Visual Studio 2017\MusicListSearcher\MusicListSearcher\
 C:\Users\Gabri\Documents\Visual Studio 2017\MusicListSearcher\MusicListSearcher\obj\Debug\MusicListSearcher.pdb
 C:\Users\Gabri\Documents\Visual Studio 2017\MusicListSearcher\MusicListSearcher\bin\Debug\DocumentFormat.OpenXml.xml
 C:\Users\Gabri\Documents\Visual Studio 2017\MusicListSearcher\MusicListSearcher\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Gabri\Documents\Visual Studio 2017\MusicListSearcher\MusicListSearcher\obj\Debug\MusicListSearcher.csprojResolveAssemblyReference.cache

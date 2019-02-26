@@ -111,80 +111,50 @@ namespace MusicListSearcher
             var data = new SlExcelData();
 
             // Open the excel document
-            WorkbookPart workbookPart = null;
+            SpreadsheetDocument document = null;
             List<Row> rows = new List<Row>();
             try
             {
-                rows = OpenExcel(path, data, out workbookPart);
+                rows = OpenExcel(path, data, out document);
             }
-            catch (Exception e)
+            catch (IOException)
             {
-                if (e.ToString().Contains("Invalid Hyperlink"))
-                {
-                    using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-                    {
-                        UriFixer.FixInvalidUri(fs, brokenUri => FixUri(brokenUri));
-                    }
-
-                    rows = OpenExcel(path, data, out workbookPart);
-                }
-                else
-                {
-                    data.Status.Message = "Unable to open the file";
-                }
-
-                //return data;
+                throw new Exception("El archivo está abiero. Por favor ciérrelo.");
             }
 
-            // Read the header
-            //if (rows.Count > 0)
-            //{
-            //    var row = rows[0];
-            //    var cellEnumerator = GetExcelCellEnumerator(row);
-            //    while (cellEnumerator.MoveNext())
-            //    {
-            //        var cell = cellEnumerator.Current;
-            //        var text = ReadExcelCell(cell, workbookPart).Trim();
-            //        data.Headers.Add(text);
-            //    }
-            //}
 
-            // Read the sheet data
-            if (rows.Count > 1)
+            if (rows.Count <= 1 || document == null) return data;
+
+            foreach (var row in rows)
             {
+                var dataRow = new List<string>();
 
-                for (var i = 0; i < rows.Count; i++)
+                var cellEnumerator = GetExcelCellEnumerator(row);
+                bool hayDatos = false;
+                while (cellEnumerator.MoveNext())
                 {
-                    var dataRow = new List<string>();
-
-                    var row = rows[i];
-                    var cellEnumerator = GetExcelCellEnumerator(row);
-                    bool hayDatos = false;
-                    while (cellEnumerator.MoveNext())
+                    var cell = cellEnumerator.Current;
+                    var text = ReadExcelCell(cell, document.WorkbookPart).Trim();
+                    dataRow.Add(text);
+                    if (!hayDatos & !string.IsNullOrEmpty(text))
                     {
-                        var cell = cellEnumerator.Current;
-                        var text = ReadExcelCell(cell, workbookPart).Trim();
-                        dataRow.Add(text);
-                        if (!hayDatos & !string.IsNullOrEmpty(text))
-                        {
-                            hayDatos = true;
-                        }
-                    }
-                    if (hayDatos)
-                    {
-                        data.DataRows.Add(dataRow);
+                        hayDatos = true;
                     }
                 }
+                if (hayDatos)
+                {
+                    data.DataRows.Add(dataRow);
+                }
             }
-
+            document.Close();
             return data;
         }
 
-        private static List<Row> OpenExcel(string path, SlExcelData data, out WorkbookPart workbookPart)
+        private static List<Row> OpenExcel(string path, SlExcelData data, out SpreadsheetDocument document)
         {
             List<Row> rows;
-            var document = SpreadsheetDocument.Open(path, false);
-            workbookPart = document.WorkbookPart;
+            document = SpreadsheetDocument.Open(path, false);
+            var workbookPart = document.WorkbookPart;
 
             var sheets = workbookPart.Workbook.Descendants<Sheet>();
             var sheet = sheets.First();

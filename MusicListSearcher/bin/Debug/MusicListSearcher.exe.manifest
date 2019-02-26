@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MusicListSearcher.exe" size="2968032">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MusicListSearcher.exe" size="2963936">
       <assemblyIdentity name="MusicListSearcher" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>YjPDMfcomLnm7kITnQKWsufkUV7USrq2kFJQS5d8Krc=</dsig:DigestValue>
+        <dsig:DigestValue>mMfbYSe2uilemzf5ANXNnmaj8TcV9txwd+SE97HNQG0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

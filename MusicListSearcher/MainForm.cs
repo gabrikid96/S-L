@@ -67,12 +67,12 @@ namespace MusicListSearcher
             if (ValidateForm()) return;
             try
             {
+                resultBox.Text = "";
                 progressBar1.Value = 0;
                 Log("Leyendo Excel...");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
                 
-                //List<string> names = Tools.GetMusicNames(excelFileInput.Text, (int) this.numBailes.Value);
-                List<string> names = Tools.GetMusicNames(excelFileInput.Text);
+                var names = Tools.GetMusicNames(excelFileInput.Text);
 
                 Log($"Se han detectado {names.Count} bailes");
 
